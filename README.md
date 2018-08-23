@@ -27,11 +27,11 @@ e. Rating [integer; value between 1 and 5]
 5. On the collection list request, the items in the list must be sortable by movie attributes.
 6. Integrate a third-party web service relevant to the project.
 
-#Extra Credit (none, any, or all)
+# Extra Credit (none, any, or all)
 1. Implement a build tool of your choosing (CloudFormation in AWS, etc)
 2. Integrate a testing suite of some sort
 
-#Keep In Mind
+# Keep In Mind
 1. We want to see your progress, not just a finished product. Email us your source code
 repository and a link to your application instance as soon as you have them setup.
 2. Stay in communication with us (ask questions, give status updates). This is part of the
