@@ -1,6 +1,3 @@
-# MovieListAPI
-
-
 # Backend Software Development Exercise
 # Objective
 Build an API service with a database backend for storing and editing a movie collection. Please
