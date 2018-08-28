@@ -1,6 +1,9 @@
 <?php
 
-//Since this is not a docker and is using forge.laravel.com the env are stored in this file
-include '.env';
 
-echo 'It works';
+
+include 'Models/Movies.php';
+
+$movies = new \movieList\Movies();
+
+$movies->create("TEST movie".rand(0,999999) ,"VHS",rand(1,500),rand(1800,2100),rand(1,5));

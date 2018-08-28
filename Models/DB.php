@@ -2,6 +2,8 @@
 
 namespace movieList;
 
+//Since this is not a docker and is using forge.laravel.com the env are stored in this file
+include '.env';
 
 class DB
 {
@@ -21,11 +23,28 @@ private $mysqli;
 		}
 	}
 
-	private function insert (){
+	private function insert ($table,$array,$types){
+		if (!($stmt = $this->mysqli->prepare("INSERT INTO $table VALUES (?)"))) {
+			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+		}
+		$id = 1;
+		if (!$stmt->bind_param($types, $id)) {
+			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
 
+		if (!$stmt->execute()) {
+			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
 	}
 
 	private function update (){
+
+	}
+
+	/**
+	 * This function is used for finding out what
+	 */
+	private function createTypeArray(){
 
 	}
 
