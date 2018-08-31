@@ -9,8 +9,17 @@ class DB
 {
 private $mysqli;
 
+
+	function __construct()
+	{
+		$this->connect();
+	}
+
+	/**
+	 *
+	 */
 	private function connect (){
-		$this->mysqli = new mysqli( getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_TABLE'));
+		$this->mysqli = new \mysqli( getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_TABLE'));
 
 		if ($this->mysqli->connect_error) {
 			die('Connect Error (' . $this->mysqli->connect_errno . ') '
@@ -23,12 +32,20 @@ private $mysqli;
 		}
 	}
 
-	private function insert ($table,$array,$types){
-		if (!($stmt = $this->mysqli->prepare("INSERT INTO $table VALUES (?)"))) {
+	/**
+	 * @param $title
+	 * @param $format
+	 * @param $length
+	 * @param $year
+	 * @param $rating
+	 */
+	public function insertMovie ($title,$format,$length,$year,$rating){
+		if (!($stmt = $this->mysqli->prepare("INSERT INTO `movieList`.`movies` (`title`, `format`, `lenght`, `year`, `rating`) 
+													VALUES (?, ?, ?, ?, ?);"))) {
 			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
 		}
-		$id = 1;
-		if (!$stmt->bind_param($types, $id)) {
+
+		if (!$stmt->bind_param("ssiii",$title,$format,$length,$year,$rating)) {
 			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
 
