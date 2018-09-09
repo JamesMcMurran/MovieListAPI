@@ -60,25 +60,17 @@ private $mysqli;
 	 * Just a simple function to get a list of movies
 	 */
 	public function listMovies ($title="DESC",$format="DESC",$length="DESC",$year="DESC",$rating="DESC"){
-		$p1="SELECT 
+		$sql="SELECT 
 				    *
 				FROM
 				    movieList.movies
-				ORDER BY ;";
-		$p2="title $title , `format` DESC , `length` DESC , `year` DESC , rating DESC";
-		$sql = $p1.$p2;
+				ORDER BY title $title , `format` $format , `length` $length , `year` $year , rating $rating;";
 
-		if (!($stmt = $this->mysqli->prepare($sql)))
-		{
-			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
-		}
 
-		if (!$stmt->execute()) {
-			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-		}
+		$this->mysqli->query($sql);
 
 		$data = array();
-		$results = $stmt->get_result();
+		$results = $this->mysqli->get_result();
 		if(!empty($results)){
 			while ($row = $results->fetch_array(MYSQLI_ASSOC)){
 				array_push($data,$row);
