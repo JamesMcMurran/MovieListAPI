@@ -40,6 +40,8 @@ class Movies
 	public function get($id){
 		#validate id
 		#Select movie list for the info
+
+
 	}
 
 	public function update(){
@@ -50,9 +52,12 @@ class Movies
 
 	}
 
-	public function getList($order="ASC"){
-
+	public function getList(){
+		$this->db->listMovies();
 	}
+
+
+	#vailidation
 
 	private function validate_title($title){
 		if(strlen ($title)>50){

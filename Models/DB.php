@@ -54,16 +54,45 @@ private $mysqli;
 		}
 	}
 
+
+
+	/**
+	 * Just a simple function to get a list of movies
+	 */
+	public function listMovies ($title="DESC",$format="DESC",$length="DESC",$year="DESC",$rating="DESC"){
+		if (!($stmt = $this->mysqli->prepare("
+				SELECT 
+				    *
+				FROM
+				    movieList.movies
+				ORDER BY title ? , `format` ? , `length` ? , `year` ? , rating ?;")))
+		{
+			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+		}
+
+		if (!$stmt->bind_param("sssss",$title,$format,$length,$year,$rating)) {
+			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
+
+		if (!$stmt->execute()) {
+			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
+
+		$data = array();
+		$results = $stmt->get_result();
+		if(!empty($results)){
+			while ($row = $results->fetch_array(MYSQLI_ASSOC)){
+				array_push($data,$row);
+			}
+		}
+		return $data;
+	}
+
+
 	private function update (){
 
 	}
 
-	/**
-	 * This function is used for finding out what
-	 */
-	private function createTypeArray(){
-
-	}
 
 	/**
 	 * Keep it clean and close it out when done
