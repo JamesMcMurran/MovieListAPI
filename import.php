@@ -32,5 +32,10 @@ foreach($objs->results as $obj){
 	$rating = $obj->vote_average/2;
 	$length = 0;
 	$format='Streaming';
+
+	if(empty($title)){
+		continue;
+	}
+
 	$movies->create($title,$format,$length,$year,$rating);
 }
