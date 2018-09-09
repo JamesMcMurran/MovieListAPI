@@ -7,7 +7,7 @@ include 'Models/Movies.php';
 $movies = new \movieList\Movies();
 
 if(!empty($_GET['list'])){
-	$movies->getList();
+	var_dump( $movies->getList() );
 }
 
 

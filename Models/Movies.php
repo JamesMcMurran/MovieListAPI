@@ -53,7 +53,7 @@ class Movies
 	}
 
 	public function getList(){
-		$this->db->listMovies();
+		return $this->db->listMovies();
 	}
 
 
