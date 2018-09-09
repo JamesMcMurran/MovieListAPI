@@ -24,9 +24,9 @@ $data = array(
 $json = file_get_contents('http://api.themoviedb.org/3/discover/movie?'.http_build_query($data));
 $objs = json_decode($json);
 foreach($objs->results as $obj){
-	$title = $obj->original_title;
+	$title = preg_replace("/[^A-Za-z0-9 ]/", '', $obj->original_title);
 	$rating = $obj->vote_average/2;
-	$year = $obj->release_date;
+	$year = preg_replace("/[^A-Za-z0-9 ]/", '', $obj->release_date);
 	$length = 0;
 	$format='Streaming';
 	$movies->create($title,$format,$length,$year,$rating);
