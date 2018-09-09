@@ -60,12 +60,15 @@ private $mysqli;
 	 * Just a simple function to get a list of movies
 	 */
 	public function listMovies ($title="DESC",$format="DESC",$length="DESC",$year="DESC",$rating="DESC"){
-		if (!($stmt = $this->mysqli->prepare("
-				SELECT 
+		$p1="SELECT 
 				    *
 				FROM
 				    movieList.movies
-				ORDER BY title ? , `format` ? , `length` ? , `year` ? , rating ?;")))
+				ORDER BY ;";
+		$p2="title $title , `format` DESC , `length` DESC , `year` DESC , rating DESC";
+		$sql = $p1.$p2;
+
+		if (!($stmt = $this->mysqli->prepare($sql)))
 		{
 			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
 		}
