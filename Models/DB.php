@@ -73,10 +73,6 @@ private $mysqli;
 			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
 		}
 
-		if (!$stmt->bind_param("sssss",$title,$format,$length,$year,$rating)) {
-			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-		}
-
 		if (!$stmt->execute()) {
 			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
