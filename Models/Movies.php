@@ -18,10 +18,10 @@ class Movies
 	/**
 	 * Use this function to make a movie entry
 	 *
-	 * @param $title  varChar 1 - 50
+	 * @param $title string 1 - 50
 	 * @param $format enum( “VHS”, “DVD”, “Streaming”)
 	 * @param $length int 0-500
-	 * @param $year   int 1800 - 2100
+	 * @param $year int 1800 - 2100
 	 * @param $rating int 1-5
 	 */
 	public function create($title,$format,$length,$year,$rating){
