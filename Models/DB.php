@@ -40,7 +40,7 @@ private $mysqli;
 	 * @param $rating
 	 */
 	public function insertMovie ($title,$format,$length,$year,$rating){
-		if (!($stmt = $this->mysqli->prepare("INSERT INTO `movieList`.`movies` (`title`, `format`, `lenght`, `year`, `rating`) 
+		if (!($stmt = $this->mysqli->prepare("INSERT INTO `movieList`.`movies` (`title`, `format`, `length`, `year`, `rating`) 
 													VALUES (?, ?, ?, ?, ?);"))) {
 			echo "Prepare failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
 		}
@@ -72,7 +72,11 @@ private $mysqli;
 			while($row = $result->fetch_object()){
 				array_push($data,$row);
 			}
+		}else{
+			echo($this->mysqli->error);
 		}
+		//$result->close();
+
 		return $data;
 	}
 
