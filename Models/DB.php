@@ -66,16 +66,15 @@ private $mysqli;
 				    movieList.movies
 				ORDER BY title $title , `format` $format , `length` $length , `year` $year , rating $rating;";
 
-
-		$this->mysqli->query($sql);
-
 		$data = array();
-		$results = $this->mysqli->get_result();
-		if(!empty($results)){
-			while ($row = $results->fetch_array(MYSQLI_ASSOC)){
+
+		if ($result = $this->mysqli->query($sql)) {
+			while($row = $result->fetch_object()){
 				array_push($data,$row);
 			}
 		}
+		$result->close();
+
 		return $data;
 	}
 
