@@ -73,8 +73,6 @@ private $mysqli;
 				array_push($data,$row);
 			}
 		}
-		$result->close();
-
 		return $data;
 	}
 
